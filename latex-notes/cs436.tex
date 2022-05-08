@@ -1,0 +1,1326 @@
+\documentclass[10pt]{article} 
+\usepackage{fullpage}
+\usepackage{bookmark}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref} % for the URL
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage[amsmath,standard,thmmarks]{ntheorem} 
+\usepackage{physics}
+\usepackage{pst-tree} % for the trees
+\usepackage{verbatim} % for comments, for version control
+\usepackage{tabu}
+\usepackage{tikz}
+\usepackage{float}
+
+\lstnewenvironment{python}{
+\lstset{frame=tb,
+language=Python,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{Green},
+keywordstyle=\color{Violet},
+commentstyle=\color{Gray},
+stringstyle=\color{Brown},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=2}
+}
+{}
+
+\lstnewenvironment{cpp}{
+\lstset{
+backgroundcolor=\color{white!90!NavyBlue},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+basicstyle={\scriptsize\ttfamily},        % the size of the fonts that are used for the code
+breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
+captionpos=b,                    % sets the caption-position to bottom
+commentstyle=\color{Gray},    % comment style
+deletekeywords={...},            % if you want to delete keywords from the given language
+escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+% firstnumber=1000,                % start line enumeration with line 1000
+frame=single,	                   % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+keywordstyle=\color{Cyan},       % keyword style
+language=c++,                 % the language of the code
+morekeywords={*,...},            % if you want to add more keywords to the set
+% numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+% numbersep=5pt,                   % how far the line-numbers are from the code
+% numberstyle=\tiny\color{Green}, % the style that is used for the line-numbers
+rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+showstringspaces=false,          % underline spaces within strings only
+showtabs=false,                  % show tabs within strings adding particular underscores
+stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+stringstyle=\color{GoldenRod},     % string literal style
+tabsize=2,	                   % sets default tabsize to 2 spaces
+title=\lstname}                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+{}
+
+% floor, ceiling, set
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\iprod}{\langle}{\rangle}
+
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\mean}{mean}
+
+% commonly used sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\sset}{\subseteq}
+
+\theoremstyle{break}
+\theorembodyfont{\upshape}
+
+\newtheorem{thm}{Theorem}[subsection]
+\tcolorboxenvironment{thm}{
+enhanced jigsaw,
+colframe=Dandelion,
+colback=White!90!Dandelion,
+drop fuzzy shadow east,
+rightrule=2mm,
+sharp corners,
+before skip=10pt,after skip=10pt
+}
+
+\newtheorem{cor}{Corollary}[thm]
+\tcolorboxenvironment{cor}{
+boxrule=0pt,
+boxsep=0pt,
+colback={White!90!RoyalPurple},
+enhanced jigsaw,
+borderline west={2pt}{0pt}{RoyalPurple},
+sharp corners,
+before skip=10pt,
+after skip=10pt,
+breakable
+}
+
+\newtheorem{lem}[thm]{Lemma}
+\tcolorboxenvironment{lem}{
+enhanced jigsaw,
+colframe=Red,
+colback={White!95!Red},
+rightrule=2mm,
+sharp corners,
+before skip=10pt,after skip=10pt
+}
+
+\newtheorem{ex}[thm]{Example}
+\tcolorboxenvironment{ex}{% from ntheorem
+blanker,left=5mm,
+sharp corners,
+before skip=10pt,after skip=10pt,
+borderline west={2pt}{0pt}{Gray}
+}
+
+\newtheorem*{pf}{Proof}
+\tcolorboxenvironment{pf}{% from ntheorem
+breakable,blanker,left=5mm,
+sharp corners,
+before skip=10pt,after skip=10pt,
+borderline west={2pt}{0pt}{NavyBlue!80!white}
+}
+
+\newtheorem{defn}{Definition}[subsection]
+\tcolorboxenvironment{defn}{
+enhanced jigsaw,
+colframe=Cerulean,
+colback=White!90!Cerulean,
+drop fuzzy shadow east,
+rightrule=2mm,
+sharp corners,
+before skip=10pt,after skip=10pt
+}
+
+\newtheorem{prop}[thm]{Proposition}
+\tcolorboxenvironment{prop}{
+boxrule=0pt,
+boxsep=0pt,
+colback={White!90!Green},
+enhanced jigsaw,
+borderline west={2pt}{0pt}{Green},
+sharp corners,
+before skip=10pt,
+after skip=10pt,
+breakable
+}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{2pt}
+
+
+\begin{document}
+\let\ref\Cref
+
+\title{\bf{CS436}}
+\date{\today}
+\author{Austin Xia}
+
+\maketitle
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+\section{internet introduction}
+billions of connected computint devices 
+
+\textbf{host} = end system 
+
+network apps is running at internet's \textbf{edge}
+
+\textbf{Packet switches}: forward packets (chunks of data), routers/switches
+
+\textbf{Communication links}: fiber/copper,radio, satellite;  transmission rate: bandwidth
+
+\textbf{networks}: collection of devices, routers, links managed by an organization
+
+\subsection{protocols}
+protocols control sending/receiving of messages
+
+Internet standards: RFC, IETF(Internet Engineering Task Force)
+
+all communication activity in Internet governed by protocols
+
+it's like human saying hello
+
+\section{network edge}
+in edge we have end system/host, client/servers 
+
+servers often in data center
+
+host hosts internet applications, clients and servers 
+
+\subsection{access network}
+wired/wireless communication links. 
+
+computer use access network to connect to network  
+\begin{itemize}
+    \item cable-based access: frequency division multiplexing (FDM): different channels transmitted in different frequency bands
+    \item HFC: hybrid fiber coax
+    \item digital subscriber line (DSL): use existing telephone line
+    \item Home network: access point, router.firewall.NAT, cable/DSL modem combined, and to/from headend/central office
+    \item wireless access networks: shared wireless access network coneects end system to router: via base station aka access point
+    \item enterprise networks: mix of wired/wrireless 
+    \item datacenter networks: high-bandwidth links, connect thousands of servers together and to internet
+\end{itemize}
+
+\subsection{host: send packets of data}
+\begin{itemize}
+    \item take application message 
+    \item breaks into chunks, \textbf{packets} of length \textbf{L}
+    \item transmit packet into access network at \textbf{transmission rate R}. link transmission rate === \textbf{capacity/link bandwidth}
+\end{itemize}
+
+packet transmission delay = time needed to transmit L-bit packet into link = $\frac{L}{R}$
+\subsection{links: physical layers}
+\begin{itemize}
+    \item bit: propogates between transmitter/receivers pairs 
+    \item physical link: lies between transmitter and receivers
+    \item guided media: signals propagate in solid media: copper/fiber/coax 
+    \item unguided media: propagate freely like radio
+\end{itemize}
+
+\begin{itemize}
+    \item Twisted pair(TP): two insulated copper wires.
+    \item coaxial cable: 2 concentric copper conductors, bidirectional, broadband 
+    \item fiber optic cable: glass fiber carrying light pulses, each pulse a bit, highspeed, low-error-rate 
+    \item wireless radio: environment effect (reflection/obstruction/interference); signals carried in various bands in electromagnetic spectrum 
+    \\radio link types: wifi, bluetooth, terrestrial microwave (point-to-point), satellite
+\end{itemize}
+
+\section{network core}
+network core is a mesh of interconnected routers 
+\textbf{packet-switching}: host break application-layer messages into packets 
+
+network forwards packet from one router to next. across links on path from source to destination
+
+\subsection{two key netowrk-core functions}
+\begin{itemize}
+    \item forwarding: aka switching, move arriving packets from router's input link to output link 
+    \item routing: global action: determine source-destination path taken by packets. there is routing algorithms
+\end{itemize}
+
+\subsection{packet-switching: store-and-forward}
+packet transmission delay: takes $L/R$ seconds to transmit (push out) L-bit packet into link at R bps 
+
+store and forward: entire packet must arrive at router begore it can be transmitted to next link
+
+\subsection{packet-switching: queueing}
+packet queuing and loss: 
+
+queueing occurs when work arrives faster than it can be serviced
+
+packets will be queueing, waiting to be transmitted, packets can be dropped(lost) if memory (buffer) in router fills up
+
+\subsection{circuit switching: alternative to packet switching}
+end-end recources allocated to, reserved for 'call' between source and destination. 
+\begin{itemize}
+    \item no sharing 
+    \item idle if not used 
+    \item used in traditional telephone networks
+\end{itemize}
+
+\begin{itemize}
+    \item FDM frequency division multiplexing: optical electromagnetic frequency divided into frequency bands, each cell allocate its own band 
+    \item TDM time division multiplexing: time divided into slots. each cell allocated periodic slots. transmit at maxium rate only during its time slots
+\end{itemize}
+
+\subsection{packet switching vs circuit switching}
+circuit-switching support fixed number of users. 
+
+packet switching support more users with small probablity of lossing packages
+
+\subsection{internet structure: network of network}
+\begin{itemize}
+    \item host connect to internet via access ISPs 
+    \item acess ISPs are interconnected so any 2 host can send packets to each other 
+    \item resulting network of networks is complex and is driven by economics/national-policies
+\end{itemize}
+
+access net \textbf{may be} connected to regional ISP, regional ISP connect to ISP are interconnected via IXP (internet exchange point)
+
+at center is well connected networks like \textbf{tire-1 commercial ISP like AT\&T} or \textbf{content provider network} (like facebook) that connect its data centers to internet, bypassing tier-1, regional ISP
+
+\subsection{performance: loss, delay, throughput}
+packet delay/loss occurs when packets \textbf{queue} in router buffers. loss when memory to hold queued packets fills up
+
+\textbf{transmission delay and queueing delay}
+
+packet delay = $d_{nodal}=d_{proccess}+d_{queue}+d_{trans}+d_{propagate/travel}$
+
+$d_{proc}$: nodal proccessing 
+\begin{itemize}
+    \item check bit errors 
+    \item determine output link 
+    \item typecially < microsecs
+\end{itemize}
+
+transmission delay is packet-length/transmission-rate 
+propogate delay is length of pysical link / proprogate speed 
+
+\textbf{queueing delay}
+\begin{itemize}
+    \item a: average packet arrival rate 
+    \item L: package length (bit)
+    \item R: link bandwidth (bit transmission rate)
+    \item traffic-intensity: $\frac{L a}{R}$ arrivial rate / service rate \begin{itemize}
+        \item $\approx 0$ small delay 
+        \item $\rightarrow 1$ large delay 
+        \item $>1$ average infinite delay
+    \end{itemize}
+\end{itemize}
+
+real internet delay: traceroute: 1st packet reach 1st probe, 2nd receive 2nd probe
+
+throughput:
+
+rate (bit/time) at which bits are sent form sender to receiver 
+\begin{itemize}
+    \item instananious 
+    \item average 
+\end{itemize}
+
+throughput is upperbounded with smallest throughput link
+\subsection{security}
+internet not designed with much security
+
+\textbf{packet sniffing}: 
+\begin{itemize}
+    \item broadcase media
+    \item read/records all packets passing by
+\end{itemize} 
+
+\textbf{denial of service (DOS)}:
+attackers make resource (server, bandwidth) unavailable to legitmate traffic by overwhelming recource with bogus traffic
+\begin{itemize}
+    \item select target 
+    \item break into host around the network (botnet)
+    \item send packets to target from compromised hosts
+\end{itemize}
+controled hosts are bots. bad guy in control is botmaster
+
+\textbf{lines of defense}
+\begin{itemize}
+    \item authentication: cellular networks provide hardware identity via SIM card. no such hardware exisit in traditional internet
+    \item confidentiality: via encryption
+    \item integrity checks: digital signature prevent/detect tampering. sigh the payload such that none can imitate the signature 
+    \item access restrictions: password-protected VPNs. create another layer of network with limited access 
+    \item firewalls: specialized middleboxes in access and core networks \begin{itemize}
+        \item off-by-default: filter coming packets to restrict senders, receivers, applications 
+        \item tecting/reacting to DOS attack
+    \end{itemize}
+    \item 
+\end{itemize}
+
+\subsection{why layering}
+approach to designing/discussing complex systems 
+\begin{itemize}
+    \item explicit structure allows identification, relationship of system's pieces: layered reference model 
+    \item modularization eases maintenance, updating of system: change in layer's service implementation: transparent to rest of system
+\end{itemize}
+
+\begin{itemize}
+    \item application: support network applications: http support web, imap support mail, DNS support all application 
+    \item transport: process-process data transfer: TCP, UDP, hides all hardware/software underneath 
+    \item network: routing of datagram from source to destination: IP, routing protocols
+    \item link: data transfer between neighbouring network elements. transmitter-receiver. end point of same physical medium. from one hop to next. like Ethernet, wifi, PPP
+    \item pysical: pushing bits on the wire
+\end{itemize}
+
+
+\subsection{stuff}
+first router is edge router, it get things into internet 
+
+access networks: digital subscriber line (DSL): use telephone line to central office DSLAM 
+
+data goes to internet, voice goes to telephone
+
+access networks: home networks
+
+cable/DSL modem to router/firewall/NAT to wifi wireless access point 
+
+this is combined into a single box
+
+\section{application layer}
+\subsection{principles of network applications}
+some network apps: wocial networking, web, text message, e-mail, streaming
+
+creating a network app: 
+
+write programs that run on different machines 
+
+no need to write software for network-core devices 
+
+\textbf{cline-server paradigm}
+server:
+\begin{itemize}
+    \item always on 
+    \item permanent IP address 
+    \item often in data center, for scaling
+\end{itemize}
+
+client:
+\begin{itemize}
+    \item contact, communicate with server 
+    \item may be intermittently connected 
+    \item may have dynamic IP address 
+    \item do not communicate directly with each other 
+\end{itemize}
+
+\textbf{peer-peer architecture}
+\begin{itemize}
+    \item no always-on server 
+    \item arbitrary end system directly communicate 
+    \item peers request service from other peers, provide service in return to other peers (so new peers bring new service capacity, as well as new sercie demands)
+    \item peers are intermittently connected and change IP address. (so requires complex management)
+\end{itemize}
+
+\textbf{process communicating}
+process: program running within a host 
+\begin{itemize}
+    \item client process: process that initiates communication 
+    \item server process: process that waits to be connected 
+    \item in P2P, client and server run on same machine
+\end{itemize}
+
+\textbf{socket}
+process sends/receives messages to/from its socket 
+
+sending socket/ receiving socket
+
+\textbf{addressing processes}
+to receive messages, process must have identifier 
+
+host device has unique 32-bit ipAddress 
+
+identifier includes both IP address and \textbf{port number}
+
+\textbf{application-layer protocol defines}
+\begin{itemize}
+    \item types of messages exchanged. (request/response)
+    \item message syntax: what fields in messages, how they delineated
+    \item message semantics: meaning of info in fields
+    \item rules: when/how process send/response to messages 
+\end{itemize}
+
+\textbf{open protocols}
+
+\begin{itemize}
+    \item defined in RFC, every has access to protocol definition
+    \item anyone can writes
+\end{itemize}
+
+app needs 
+\begin{itemize}
+    \item reliability (no loss/loss-tolerent)
+    \item timing
+    \item throughput
+\end{itemize}
+
+\textbf{internet transport protocols services}
+\begin{itemize}
+    \item TCP: \begin{itemize}
+        \item reliable transport between sending and receiving protocols,
+        \item flow control: sender won't overwhelm receiver. 
+        \item cogestion control:throttle sender when network overloaded
+        \item connection-oriented: setup required between client and server processes
+        \item does not provide: timing, minium throughput guarantee, security
+    \end{itemize} 
+    \item UDP: \begin{itemize}
+        \item unreliable data transfer between sending receiving process 
+        \item does not provide: reliability, flow control, congestion control, timing, throughput guarantee, security, connection setup
+    \end{itemize}
+    \item TLS transport layer security: provides encryped TCP connections, data integrity, end-point authentication
+\end{itemize}
+    note: you can implement security in application layer, even transport layer no security
+
+\subsection{web and http}
+\textbf{web and http}
+\begin{itemize}
+    \item web page consists of objects
+    \item objects can be html file, image etc 
+    \item web page consists of base html-file, which includes several referenced objects, each addressable by url 
+\end{itemize}
+
+http:
+\begin{itemize}
+    \item web's application-layer protocol 
+    \item client: brower that requests receives ( using http protocol) and displays web object; server: web server sends (using http protocol) objects in response to request
+    \item use TCP, client intiates TCP connection to server 
+    \item server accepts tcp connection 
+    \item http messages (application-layer protocol messages) exhanged between browser (http client) and web server (http server)
+    \item tcp closed
+    \item http is statelss: server maintains no info about past client requests
+\end{itemize}
+
+\textbf{non-persistent http vs persistent http}
+non-persistent:
+\begin{itemize}
+    \item tcp connection opened 
+    \item at most 1 object sent over tcp connection 
+    \item tcp connection closed 
+\end{itemize}
+
+persistent http:
+\begin{itemize}
+    \item tcp connection opened 
+    \item multiple objects sent in one connection 
+    \item tcp connection closed
+\end{itemize}
+
+example 
+\begin{itemize}
+    \item 1a client initiate tcp connection at port 80 
+    \item 1b server waiting for tcp connction at port 80 accepts connection 
+    \item 2 client send http request message 
+    \item 3 server receives message, send stuff 
+    \item 4 http server close tcp connection 
+    \item 5 client receive response containing html file, parse html finds 10 referenced jpg file 5 
+    \item 6 repeat 1-5 10 times
+\end{itemize}
+thus 11 objects in total, 2 RTT per object + transmission time. 
+
+
+\textbf{non-persistent http: response time}
+\textbf{RTT: round trip time}: time for a small packet to travel from clinet to server and back 
+
+http response time (per object):
+\begin{itemize}
+    \item one RTT to initiate tcp connection 
+    \item one rtt for http request and first few bytes of http respone to return 
+    \item object/file transmission time
+\end{itemize}
+
+issues: 
+\begin{itemize}
+    \item 2 rtt per objects 
+    \item os overhead for each tcp connection 
+    \item browsers often open multiple parallel tcp connections to fetch referenced objects in parallel
+\end{itemize}
+
+persistent http(http 1.1):
+\begin{itemize}
+    \item server leaves connection open after sending response 
+    \item subsequent http messages between same client/server sent over open connection 
+    \item clinet sends requests as soon as it encouters a referenced object 
+    \item as little as 1 rtt for all reference objects
+\end{itemize}
+
+\textbf{http request message}
+\begin{itemize}
+    \item 2 types of http messages: request, response 
+    \item http request message: ASCII
+\end{itemize}
+
+http1.1 introduced multiple, pipelined GETs over single TCP connection 
+\begin{itemize}
+    \item server responds in-order (first come first server) to get requests 
+    \item with fcfs, first object may block other objects 
+    \item loss recovery retransmitting lost tcp segments stalls objects transmission
+\end{itemize}
+
+http/2: key goal: decreased delay in multi-object http requests 
+
+increase flixbility at server in sending objects to clinets 
+\begin{itemize}
+    \item methods, status code, most header fields unchanged 
+    \item transmission order of requested objects based on client-specified objects priority
+    \item push unreuqested objects to clients
+    \item divide objects into frames, schedule frames to mitigate HOL blocking
+\end{itemize}
+
+\textbf{http/2 to http/3}
+http/2 over tcp connection means:
+\begin{itemize}
+    \item recovery form packet loss still stalls all object transmission: browers have incentive to parallel tcp connection to reduece stalling 
+    \item no security 
+    \item HTTP/3 adds security, per object error and congestion-control over UDP
+\end{itemize}
+
+\textbf{maintaining user/server state: cookies}
+cookies has 4 components: 
+\begin{itemize}
+    \item cookie header line of http repsonse message 
+    \item cookie header line in next http request message 
+    \item cookie file kept on user's host managed by user's browser 
+    \item back-end database at web site
+\end{itemize}
+
+cookies can be used for 
+\begin{itemize}
+    \item authorization 
+    \item shopping cart 
+    \item recommendation
+    \item user session state (web email)
+\end{itemize}
+
+\textbf{web caches}
+goal: satisfy clinet requests without involving origin server 
+
+user configure browser to point to a local Web Cache 
+
+browser sends all http request to cache, if object in cache, cache returns object to client
+
+web cache act as server for original requesting client, client to origin server 
+
+server tells cache object's allowable caching in response header 
+\subsection{email smtp imap}
+\begin{itemize}
+    \item user agents 
+    \item mail servers 
+    \item simple mail transfer protocol: SMTP 
+\end{itemize}
+user agent:
+\begin{itemize}
+    \item  mail reader 
+    \item  composing editing reading mail messages 
+    \item outgoing incoming messages stored on server 
+\end{itemize}
+
+mail server: 
+
+\begin{itemize}
+    \item  mailbox contains incoming messages for user 
+    \item  message queue of outgoing (to be sent) mail messages 
+    \item  SMTP protocol between mail servers to send email messages 
+\end{itemize}
+
+SMTP RFC 
+\begin{itemize}
+    \item use tcp to reliably transfer email from client(mail server initiating connection) to server 
+\end{itemize}
+
+\subsection{dns domain name system}
+\begin{itemize}
+    \item distributed database implemented in hierarchy of many name servers 
+    \item application-layer protocol (complexity at edge, not core)
+    \item services: \begin{itemize}
+        \item hostname-to-IP-address translation 
+        \item host aliasing 
+        \item mail server aliasing 
+        \item load distribution 
+    \end{itemize}
+\end{itemize}
+
+root dns, top level domain (.edu, .org DNS serverse), authorizative(yahoo.com dns servers)
+
+example: to find www.amazon.com, client queries root server to find .com dns server, queries .com dns server to find amazon.com DNS server, query amazon.com DNS server to get IP address for www.amazon.com
+
+\subsubsection{first layer}
+\textbf{dns: root name servers}
+\begin{itemize}
+    \item  official, contact of last resort by name servers that cannot resolve name 
+    \item  ICANN internet corporation for assigned names and numbers manages root DNS domain
+    \item 13 logical root name servers worldside each server replicated many times
+\end{itemize}
+
+\subsubsection{second layer}
+\textbf{top level domain, and authoritative servers}
+responsible for .com, .org .ca, .cn etc. 
+
+network solutions: authoritative registry for .com, .net TLD
+
+Educase: .edu TLD 
+
+\subsubsection{third layer}
+\textbf{authoritative DNS servers}
+organization's own server providing hostname to IP mapping for organization's named host
+
+can be maintained by organization or service provider
+
+\textbf{DNS name resolution}
+\begin{itemize}
+    \item iterated query: contacted server replies with name of server to contact
+    \item recursive query: puts burden of name resolution on contacted name server 
+\end{itemize}
+
+\textbf{dns records, RR}
+distributed database storing resource record (RR)
+
+RR format: 
+\begin{itemize}
+    \item type=A name is hostname value is ipAddress 
+    \item type=CNAME,  name is alias for real name, value is canonical name (www.ibm.com is really servereast.backup2.ibm.com)
+    \item type=NS, name is domain (foo.com) value is hostname of authoritative name server for this domain
+    \item type=MX, value is name of SMTP mail server with name
+\end{itemize}
+
+DNS query and reply message have same format 
+
+header: indentification 16 bit, flags: query or reply, recursion desired, recursion available, reply is authoritative
+
+questions: name type fields for a query 
+
+answers: RRs in response to query 
+
+authority: records for authoritative servers 
+
+addition info: 
+
+\subsection{p2p app}
+\begin{itemize}
+    \item no always-on server 
+    \item arbitrary end system directly communicate 
+    \item peer request service from other peers, provide service in return to other peers 
+    \item intermittently connected and change IP address 
+    \item example: bit torrent 
+\end{itemize}
+
+using client server, time to distribute F to N clients is 
+$$D_{c-s} \geq max\{NF/u_s, F/d_{min}\}$$
+
+for p2p,
+$$D_{P2P} \geq max\{F/u_s, F/d_{min}, NF/(u_s+\sum u_i)\}$$
+
+\textbf{bitTorrent}
+
+files divided into 256KB chunks 
+
+peers in swarm send receive file chunks 
+
+\textbf{tracker} tracks peers participating in swarm
+
+\textbf{swarm} group of users exchanging files
+
+\textbf{churn} peers may come and go
+
+\subsection{video streaming and content distribution}
+\textbf{dash}
+server:
+\begin{itemize}
+    \item divides file into multiple chunks 
+    \item each chunk encoded at multiple different rates 
+    \item different rate encodings stored in different files 
+    \item files replicated in various CDN nodes 
+    \item \textbf{manifest file}: privides URL for different chunks
+\end{itemize}
+
+client: 
+\begin{itemize}
+    \item periodically estimates server-to-client bandwidth 
+    \item consulting manifest, requesting one chunk at a time (choose rate from different server)
+\end{itemize}
+
+client intelligence: when, what encoding rate, where
+
+steaming video = encoding + DASH + playout buffering 
+
+\textbf{CDN} content distribution networks 
+
+\begin{itemize}
+    \item enter deep: push CDN servers into many access networks close to users 
+    \item bring home: smaller number of large clusters in POPs near access nets 
+\end{itemize}
+
+CDN stores copies of content at CDN nodes 
+
+returns manifest to subscriber 
+
+OTT: over the top, internet host-host communication as a service, use dash and internet instead of directly streaming
+
+
+\section{transport layer}
+\subsection{transport layer services}
+\begin{itemize}
+    \item  provide logical communication between application processes running on different host
+    \item transport protocols actions in end systems \begin{itemize}
+        \item sender: break applciation messages into segments, passes to network layer 
+        \item receiver: reassembers segments into messages, passes to application layer
+    \end{itemize}
+    \item 2 transport layer protocols available: TCP and UDP
+\end{itemize}
+
+network layer: logical communication between hosts 
+
+transport layer: logical communication between \textbf{processes}
+
+actions: 
+
+sender:
+\begin{itemize}
+    \item is passed application layer message 
+    \item determines segment header fields value 
+    \item creates segment 
+    \item passes segment to IP 
+\end{itemize}
+
+receiver: 
+\begin{itemize}
+    \item receives segment from IP 
+    \item check header value 
+    \item extracts applciation-layer messages 
+    \item demultiplexes message up to application via socket
+\end{itemize}
+
+TCP:
+\begin{itemize}
+    \item reliable, in order 
+    \item congestion control 
+    \item flow control 
+    \item connection setup 
+\end{itemize}
+
+UDP:
+\begin{itemize}
+    \item unreliable unordered 
+    \item no-frills extension of best-effort IP 
+\end{itemize}
+
+
+\subsection{multiplexing and demultiplexing}
+demultiplexing at receiver: user header info to deliver received segments to correct socket 
+
+multiplexing at sender: handle data from multiple sockets, add transport header 
+
+\textbf{demultiplexing work by}:
+
+host receives \textbf{ IP datagram}, which has source IP and destination IP 
+
+each datagram carries one \textbf{ transport-layer segment}, each segment has source destination port number
+
+host uses IP addresses and port numbers to direct segment to appropriate socket
+
+\subsubsection{connectionless demultiplexing vs connection-oriented demultiplexing}
+tcp socket identified by 
+\begin{itemize}
+    \item source IP 
+    \item source port 
+    \item dest IP 
+    \item dest port
+\end{itemize}
+
+demux: receiver uses all 4 value to direct segment to appropriate socket 
+
+where as UDP doesn't care about source IP and source port
+
+
+\subsection{connectionless transport UDP}
+segments may be lost or delivered out of order  
+
+conectionless: no handshaking between sender/receiver; each segment handled independently of others 
+
+we can add flow/congestion control or reliability at application layer 
+
+UDP checksum: detect errors 
+
+got 2 port number (16 bit int)
+
+wraparound(addition), then sum(add 1 if wraparound is 17 bit), then checksum (flip bit in sum)
+
+
+\subsection{connection oriented transport TCP}
+\begin{itemize}
+    \item point-to-point (one sender one receiver)
+    \item reliable, in-order (no message boundaries)
+    \item full duplex data: bi-directional data flow in same connection 
+    \item cumulative ACKs 
+    \item pipelining (TCP congestion and flow ontrol set window size)
+    \item connection oriented: handshaking initializes sender, receiver state before exchange 
+    \item flow controlled: sender wont overwhelm receiver
+\end{itemize}
+
+\subsubsection{tcp segment structure}
+\begin{itemize}
+    \item sequence number: counting bytes of data into bytestream (not segment)
+    \item acknowledge number: seq number of next expected byte 
+    \item receive window: bytes receiver willing to accept 
+    \item (TCP) options and applicaiton data are of variable length
+    \item C,E are congestion notification 
+    \item RSF: RST, SYN, FIN: connection management
+    \item there is also header length and checksum
+\end{itemize}
+
+tcp sender: 
+
+\begin{itemize}
+    \item event: data received from application  
+
+    \begin{itemize}
+        \item create segment with seq \#
+        \item seq \# is bytestream number of first data byte in segment 
+        \item start timer if not already running (think of timer as for oldest unACKed segment), expiration interval: timeoutInterval
+    \end{itemize}
+    \item event: timeout \begin{itemize}
+        \item retransmit segment that caused timeout 
+        \item restart timer
+    \end{itemize}
+    \item event: ACK received \begin{itemize}
+        \item if ACK acknowledges previously unACKed segments: updates what is known to be ACKed 
+        \item start timer if there are still unACKed segments
+    \end{itemize}
+\end{itemize}
+
+TCP fast retransmit:
+
+if sender receives 3 additional ACKs for same data, resend unACKed segment with smallest seq\#, because
+most likely, unACKed segment is lost
+
+
+
+
+
+
+\subsection{tcp congestion control}
+tcp sender limits transmission: lastByteSent-lastByteAcked $\leq$ cwnd
+
+cwnd is dynamically adjusted 
+
+tcp rate $\approx \frac{cwnd}{RTT}$ bytes/sec
+
+tcp slow start: initial cwnd = 1 MSS 
+
+double cwnd each RTT
+
+\section{network layer}
+\begin{itemize}
+    \item transport segment from sending to receiving host 
+    \item on sending side encapsulates segments into datagrams 
+    \item on receiving side, delivers xegments to transport layer 
+    \item network layer protocols in \textbf{every} host, router 
+    \item router examines header fields in all IP datagrams passing through it
+\end{itemize}
+
+
+forwarding: move packets from router's input to appropriate router output
+
+routing: determine route taken by packets from source to dest 
+
+local forwarding table: determines local forwarding (header value 0100 into output link 3)
+
+this uses longest prefix matching
+
+IP address: 32 bits 
+
+interface: connection between host/router and physical link 
+
+routers typically has multiple interfaces, hosts typically has 1 or 2 interfaces, each interface has an IP address 
+
+\subsection{CIDR}
+CIDR: classless interdomain routing
+
+a.b.c.d/x where x is number of bits in subnet portion of address 
+
+200.23.16.0/23 means 23 bits fixed, 32-23 bits free
+
+subnet part - high order bits,
+
+host part - low order bits 
+
+what is a subnet? device interfaces with same subnet part of IP address, can physically reach each other without intervening router
+
+\subsection{dhcp}
+\textbf{dhcp} dynamic host configuration protocol. dynamically get address from server
+
+goal: allow host dynamically obtain its IP address from network server when it joins network
+\begin{itemize}
+    \item can renew its lease on address in use 
+    \item allows reuse of address 
+    \item support for mobile users who want to join network
+\end{itemize}
+
+overview: 
+\begin{itemize}
+    \item host broadcases "DHCP discover" msg [optional]
+    \item dhcp server responds with "DHCP offer" msg [optional]
+    \item host requests IP address: "DHCP request" msg 
+    \item DHCP server sends address "DHCP ack" msg
+\end{itemize}
+
+DHCP can return more than just allocated IP address on subnet 
+\begin{itemize}
+    \item address of first-hop router for client 
+    \item name and IP address of DNS server 
+    \item network mask ( indicating network versus host portion of address )
+\end{itemize}
+
+how does network get subnet part of IP addr? gets allocated portion of its provider ISP's address space
+
+how does ISP get block of address? from ICANN (internet corportation for assigned names and numbers)
+
+\subsection{NAT}
+NAT: network address translation
+
+datagrams with source or destination in this network has $10.0.0/24$ address for source, destination as well 
+
+datagrams leaving local network have same single source NAT IP address $138.76.29.7$ different source port number
+
+local network uses just 1 IP address as for as outside world is concerned 
+
+\begin{itemize}
+    \item range of address not needed from ISP, just 1 address for all devices 
+    \item can change addresses of devices in local network without notifying outside world 
+    \item can change ISP withou changing addresses of devices in local network 
+    \item devices inside local net not explicitly addressable 
+\end{itemize}
+
+implementation: NAT router 
+\begin{itemize}
+    \item outgoing datagrams: replace source IP address, port number to NAT IP address, new port number 
+    \item remember every source IP address, port number to NAT IP address, new port number 
+    \item incoming datagrams: replace NAT IP address, new port number to corresponding stuff stored in NAT table
+\end{itemize}
+
+port number is 16 bit long 
+
+NAT is controversal 
+\begin{itemize}
+    \item routers should only process up to layer 3 
+    \item violates end-to-end argument (P2P must consider NAT)
+    \item address shortage should be solved by IPv6
+\end{itemize}
+
+\subsection{IP gragmentation reassembly}
+network links have MTU (max transfer size), largest possible link-level frame 
+
+large IP datagram divided within net
+
+\begin{itemize}
+    \item  one datagram becomes several datagrams 
+    \item reassembled only at final destination 
+    \item IP header bits used to identify order related
+\end{itemize}
+
+fragflag: if 1, more fragment coming 
+
+offset: what bit is it now
+
+\section{routing}
+routing algorithms:
+\subsection{dijsktra}
+Initialization: 
+$N = \{u\}$
+for all nodes v
+if v adjacent to u, $d(v)=c(u,v)$
+
+else $D(v)=\infty$
+
+Loop:
+
+find w not in N st D(w) is a minimum 
+
+add w to N 
+
+updated D(v) for all v adjacent to w, not in N 
+$$D(v)=min(D(v), D(w)_c(w,v))$$
+
+until all nodes are in N
+
+\subsection{distance vector altorithm}
+each node knows cost to each neighbor, and maintains its neighbors distance vectors 
+
+when x receives new DV estimate from neighbor, it udpates its own dv using 
+
+$D_x(y) \rightarrow min_v\{c(x,v)+D_v(y)\}$
+
+administrative autonomy: 
+
+internet=networks of networks,
+
+each network admin may want to control routing in its own network 
+
+\subsection{hierarchical routing}
+aggregate routers into regions "autonomous system" (AS)
+
+routers in same AS run same routing protocol 
+
+gateway router: at edge of its own AS, has link to router in another AS
+
+forwarding table configured by both intra-and inter- AS routing algorithms
+
+\section{link layer}
+hosts, routers are \textbf{nodes}
+
+communication channels that connect adjacent nodes along communication path: links
+
+there is wired links, wireless links, and LANs 
+
+layer-2 packet: frame, encapsulates datagram
+
+data-link layer has responsibility of transferring datagram from one node to physically adjacent node over a link
+
+datagram transferred by different link protocols over different links (ethernet, then frame relay, then 802.11)
+
+\subsection{link layer services}
+\begin{itemize}
+    \item framing, link access \begin{itemize}
+        \item encapsulate datagram into frame, adding header/tailer 
+        \item channel access if shared medium 
+        \item mac address used in frame headers to identify source/destination
+    \end{itemize}
+    \item reliable dilivery between adjacent nodes \begin{itemize}
+        \item like in transport layer 
+        \item seldom used on low bit-error link 
+        \item wireless link has high error rates 
+    \end{itemize}
+    \item error detection \begin{itemize}
+        \item errors caused by signal attenuation, noise 
+        \item receiver detects presence of errors (signals sender for retransmission or drops frame)
+    \end{itemize}
+    \item error correction: receiver identifies and corrects bit error without resorting to retransmission
+\end{itemize}
+
+
+link layer is implemented in
+\begin{itemize}
+    \item each and every host
+    \item in adaptor/NIC or on a chip  
+    \item attaches into host's system buses 
+    \item combination of hardware software, firmware
+\end{itemize}
+
+adaptors communicating 
+
+sending side:
+\begin{itemize}
+    \item encapsulates datagram in frame 
+    \item adds error checking bits, rdt, flow control, etc 
+\end{itemize}
+
+receiving side 
+\begin{itemize}
+    \item looks for errors, rdt, flow control, etc 
+    \item extracts datagram, passes to upper layer at receiving side
+\end{itemize}
+
+
+multiple access protocols 
+\begin{itemize}
+    \item single shared broadcast channel 
+    \item $\geq$ 2 simutaneous transmissions by nodes: interference, collision if nodes receives $\geq$ 2 signals 
+\end{itemize}
+
+distributed algorithm that determines how nodes share channel 
+
+\subsection{mac protocols: taxonomy}
+3 broad classes:
+\begin{itemize}
+    \item channel partitioning  (divide channel into smaller pieces, allocate peice to ndoe for exclusive use)
+    \item random access (channel not divided, allow collision and recover from it )
+    \item taking turns (take turns but nodes with more to send take longer turns)
+\end{itemize}
+
+\textbf{TDMA} time division multiple access 
+
+\textbf{FDMA}
+
+\textbf{random access protocols: CSMA}
+
+carrier sense multiple access (CSMA): listen before transmit, if idle, transmit entire frame, else defer
+
+carrier sense multiple access, collision detection (CSMA/CD): listen before transmit, if idle, transmit, else defer
+
+after aborting, nic enters exponential backoff: after mth collision, nIC chooses K at random from $\{0,1,2...\}$ NIC waits $K*512$ bit times
+
+\textbf{polling (take turns)}
+
+master invites slave nodes to transmit in turn, typically used with dumb slave devices 
+
+concern: polling overhead, latency, single point of failure(master)
+
+\textbf{token passing}
+
+control token passed from one node to next sequentially 
+
+there is token message 
+
+concern: token overhead, latency, single point of failure(token)
+
+\subsection{LAN addresses and ARP}
+LAN address is MAC address, is allocated by IEEE 
+
+manufacturer buys MAC address, like social security number, IP address is postal code 
+
+MAC flat address gets portability, can move LAN card from one LAN to another 
+
+ARP table: each IP node (host, router) on LAN has table,
+it has IP$/$MAC address mappings for some LAN nodes $<$IP address; MAC address; TTL$>$
+
+
+\textbf{ARP protocol: same LAN}
+A wants to send datagram to B 
+
+B's MAC address not in A's ARP table 
+
+A boradcast ARP query packet, containing B's IP address 
+(dest MAC address = FF-FF-FF-FF-FF-FF), all nodes on LAN receive ARP query
+
+B receives ARP packet, replies to A with its MAC address 
+(sent to A's MAC address)
+
+A caches IP-to-MAC mapping in its ARP until timeout.
+soft state: information that times out unless refreshed 
+
+ARP is plug and play: nodes create their ARP tables without intervention from net administrator
+
+\subsection{addressing: routing to another LAN}
+send datagram from A to B via R 
+
+\begin{itemize}
+    \item focus on addressing - at IP and MAC layer 
+    \item assume A knows B IP address 
+    \item asuume A knows IP address of first hop router R
+    \item assume A knows R's MAC address
+\end{itemize}
+
+A creates IP datagram with IP source A destination B
+
+A creates link layer frame with R's MAC address as dest, frame contains A-B IP datagram 
+
+frame sent A to R, received at R, datagram removed, passed up to IP 
+
+R forwards datagram with IP source A destination B
+
+R creates link-layer frame with B's MAC address as dest, frame contains A-B IP datagram
+
+ethernet physical topology: 
+
+bus: all nodes in same collision domain (all devices connected to one cable)
+
+start: active switch in center, each spoke runs a separate ethernet protocol (nodes do not collide)
+
+\subsection{ethernet frame structure}
+sending adapter encapsulate IP datagram in ethernet frame 
+
+preamble, destMacAddr, sourceAddr, type, data, CRC 
+
+preamble is 7 bytes used to synchronize receiver, sender clock rates 
+
+type is usually IP, could be AppleTalk 
+
+CRC cyclic redundancy check at receiver
+
+\subsection{ethernet: unreliable connectionless}
+connectionless: no handshaking between NIC 
+
+unreliable: no ack 
+
+uses CSMA$/$CD
+
+\subsection{ethernet switch}
+link-layer device: takes an active role 
+
+store, forward ethernet frames
+
+examine encoming mac address, selectively forward frame to one-or-more outgoing links when 
+frame is to be forwarded on segment, uses CSMA$/$CD to access segment
+
+transparent: host are unaware of presense of switches 
+
+plug-and-play: do not need to be configured
+\subsection{switch: multiple simultaneous transmission}
+hosts have dedicated, direct connection to switch 
+
+switch buffer packets 
+
+ethernet protocol used on each incoming link, but no collisions; full duplex each link is its own collision domain  
+
+\subsection{switch forwarding table}
+each switch has a swtich table like a routing table 
+
+switch learns which host through which interface
+
+\begin{itemize}
+    \item record incoming link with mac address of sending host 
+    \item index switch table using MAC destination address 
+    \item if entry found: {if destination on segment from which frame arrive, drop frame 
+        else forward frame on interface indicated by entry }
+          else: flood (forward all interfaces except arriving interface)
+\end{itemize}
+
+\subsection{switch vs router}
+both store-and-forward 
+\begin{itemize}
+    \item routers: network-layer device (examine network layer header)
+    \item swtich: link-layer device (examine link layer header)
+\end{itemize}
+
+both have forwarding table
+\begin{itemize}
+    \item routers: compute using routing algorithm, IP addresses
+    \item switches: learn forwarding using flooding learning MAC address
+\end{itemize}
+\subsection{a day in the life}
+\begin{itemize}
+    \item connecting laptop needs to get their IP address, addr of first-hop router, of DNS server: use \textbf{DHCP}
+    \item DHCP request encapsulated in UDP, encapsulated in IP, encapsulated in 802.3 ethernet,
+    \item ether frame braodcast (dest:FFFFFFFFFFFF) on LAN, received at router running DHCP server
+    \item thernet demuxed to IP demuxed, UDP dumuxed to DHCP (de-multiplexing)
+    \item DHCP server formulates DHCP ACK containing client IP address, IP address of first-hop router
+    \item encapsulation at DHCP server, frame forwarded (switch learning) through LAN, demultiplexing at client
+    \item DHCP client receives DHCP ack reply
+    \item \textbf{client now knows IP address, name,address of DNS server, IP address of first hop router}
+    \item before sending HTTP request, need IP address of google
+    \item DNS query created, encapsulated in IP, in Ethernet. to send frame to router, need MAC address of router interfaceL (ARP)
+    \item ARP query broadcast, received by router, which replies with ARP reply giving MAC address of router interface
+    \item client now knows MAC address of first hop router, so can now send frame containing DNS query
+    \item IP datagram containing DNS query forwarded via LAN switch from client to 1st hop router 
+    \item IP datagram forwarded from campus network into comcast network, routed to DNS server
+    \item demux at DNS server 
+    \item DNS reply to clinet with IP address of google 
+    \item to send http request, client opens tcp socket to web server 
+    \item tcp syn segment (step 1 in 3-way handshake) inter-domain routed to web server 
+    \item web server responds with tcp synack (step 2)
+    \item tcp connection established
+    \item http request sent to tcp socket 
+    \item ip datagram containing http request routed to google 
+    \item web server respondes with http reply 
+    \item ip datagram routed back to client
+\end{itemize}
+
+\end{document}

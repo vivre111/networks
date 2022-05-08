@@ -1,0 +1,56 @@
+\contentsline {section}{\numberline {1}internet introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}protocols}{4}{subsection.1.1}%
+\contentsline {section}{\numberline {2}network edge}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}access network}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}host: send packets of data}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}links: physical layers}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}network core}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}two key netowrk-core functions}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}packet-switching: store-and-forward}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}packet-switching: queueing}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}circuit switching: alternative to packet switching}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}packet switching vs circuit switching}{6}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}internet structure: network of network}{6}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}performance: loss, delay, throughput}{6}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}security}{7}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}why layering}{8}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}stuff}{8}{subsection.3.10}%
+\contentsline {section}{\numberline {4}application layer}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}principles of network applications}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}web and http}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}email smtp imap}{12}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}dns domain name system}{13}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}first layer}{13}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}second layer}{13}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}third layer}{14}{subsubsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.5}p2p app}{14}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}video streaming and content distribution}{15}{subsection.4.6}%
+\contentsline {section}{\numberline {5}transport layer}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}transport layer services}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}multiplexing and demultiplexing}{16}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}connectionless demultiplexing vs connection-oriented demultiplexing}{16}{subsubsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.3}connectionless transport UDP}{17}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}connection oriented transport TCP}{17}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}tcp segment structure}{17}{subsubsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.5}tcp congestion control}{18}{subsection.5.5}%
+\contentsline {section}{\numberline {6}network layer}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}CIDR}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}dhcp}{19}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}NAT}{19}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}IP gragmentation reassembly}{20}{subsection.6.4}%
+\contentsline {section}{\numberline {7}routing}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}dijsktra}{20}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}distance vector altorithm}{20}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}hierarchical routing}{21}{subsection.7.3}%
+\contentsline {section}{\numberline {8}link layer}{21}{section.8}%
+\contentsline {subsection}{\numberline {8.1}link layer services}{21}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}mac protocols: taxonomy}{22}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}LAN addresses and ARP}{22}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}addressing: routing to another LAN}{23}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}ethernet frame structure}{23}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}ethernet: unreliable connectionless}{23}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}ethernet switch}{23}{subsection.8.7}%
+\contentsline {subsection}{\numberline {8.8}switch: multiple simultaneous transmission}{24}{subsection.8.8}%
+\contentsline {subsection}{\numberline {8.9}switch forwarding table}{24}{subsection.8.9}%
+\contentsline {subsection}{\numberline {8.10}switch vs router}{24}{subsection.8.10}%
+\contentsline {subsection}{\numberline {8.11}a day in the life}{24}{subsection.8.11}%
